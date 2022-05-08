@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    django:
+        build:
+            context: ./
+            dockerfile: ./docker/Dockerfile
+        volumes:
+            - ./:/work
+        ports:
+            - 8080:8080
+        environment:
+            # 1ならデバックモード
+            - DEBUG=1
+        command: /bin/bash -c "while :; do sleep 10; done"
