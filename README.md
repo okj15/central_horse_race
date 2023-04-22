@@ -1,1 +1,3 @@
-docker exec -it 805a91d9840b /bin/bash
+### 起動方法
+1. docker compose up -d
+2. docker exec -it horse-django /bin/bash
