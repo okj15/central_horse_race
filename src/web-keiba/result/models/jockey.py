@@ -26,7 +26,6 @@ class Jockey(models.Model):
     earnings = models.FloatField()
     jockey = models.ForeignKey(BaseJockey, on_delete=models.CASCADE)
 
-    
     class Meta:
         verbose_name = '騎手成績'
         verbose_name_plural = verbose_name

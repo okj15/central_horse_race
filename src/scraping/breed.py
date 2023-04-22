@@ -31,7 +31,6 @@ def main():
     breed = BreedScraping()
 
     # 取得対象のhorse_id取得
-    
 
     # html取得
     breed.scrape_html_past()

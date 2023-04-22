@@ -23,7 +23,7 @@ class Command(BaseCommand):
         html.encoding = 'EUC-JP'
         soup = BeautifulSoup(html.text, 'html.parser')
         with open(f'/work/data/html/{target}/{_id}.html', 'w') as f:
-                f.write(str(soup))
+            f.write(str(soup))
 
         return soup
 
@@ -36,7 +36,7 @@ class Command(BaseCommand):
             html.encoding = 'EUC-JP'
             soup = BeautifulSoup(html.text, 'html.parser')
             with open(f'/work/data/html/race/2021/{race_id}.html', 'w') as f:
-                    f.write(str(soup))
+                f.write(str(soup))
 
     def scrape_and_save_horse(self, soup, horse_id, horse_name):
         # 共通
@@ -122,20 +122,25 @@ class Command(BaseCommand):
         race_number = soup.find_all('span', class_='RaceNum')[0].text.split()[0].replace('R', '')
         # 馬場
         try:
-            track_type =  TrackType.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[2][0]).first()
+            track_type = TrackType.objects.filter(
+                name=soup.find_all('div', class_='RaceData01')[0].text.split()[2][0]).first()
         except:
             return
         # 距離
         distance = soup.find_all('div', class_='RaceData01')[0].text.split()[2][1:-1]
         # 馬場状態
         try:
-            track_condition = TrackCondition.objects.filter(name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[1]).first()
+            track_condition = TrackCondition.objects.filter(
+                name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[
+                    1]).first()
         except:
             return
         # 左右周り
-        direction = Direction.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')', '')).first()
+        direction = Direction.objects.filter(
+            name=soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')', '')).first()
         # 天気
-        weather = Weather.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
+        weather = Weather.objects.filter(
+            name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
         # 出走馬数
         starters = len(soup.find_all('div', class_='Rank'))
         for _rank in soup.find_all('div', class_='Rank'):
@@ -154,7 +159,8 @@ class Command(BaseCommand):
             horse_number = tr.find('td', class_=lambda value: value and value.startswith('Num Txt_C')).text.split()[0]
             # 馬ID
             horse_id = tr.find('span', class_='Horse_Name').find('a').get('href').split('/')[-1]
-            horse = Horse.objects.filter(id=tr.find('span', class_='Horse_Name').find('a').get('href').split('/')[-1]).first()
+            horse = Horse.objects.filter(
+                id=tr.find('span', class_='Horse_Name').find('a').get('href').split('/')[-1]).first()
 
             # horse情報なければ追加
             if horse is None:
@@ -170,11 +176,14 @@ class Command(BaseCommand):
             # 斤量
             jockey_weight = float(tr.find('span', class_='JockeyWeight').text.split()[0])
             # 騎手ID
-            jockey_id = Jockey.objects.filter(id=tr.find('td', class_='Jockey').find('a').get('href').split('/')[-2]).first()
+            jockey_id = Jockey.objects.filter(
+                id=tr.find('td', class_='Jockey').find('a').get('href').split('/')[-2]).first()
             # トレーニングセンター
-            training_center = TrainingCenter.objects.filter(name=tr.find('td', class_='Trainer').find('span').text).first()
+            training_center = TrainingCenter.objects.filter(
+                name=tr.find('td', class_='Trainer').find('span').text).first()
             # 調教師ID
-            trainer_id = Trainer.objects.filter(id=tr.find('td', class_='Trainer').find('a').get('href').split('/')[-2]).first()
+            trainer_id = Trainer.objects.filter(
+                id=tr.find('td', class_='Trainer').find('a').get('href').split('/')[-2]).first()
 
             # タイム
             race_time = tr.find('span', class_='RaceTime').text.split()[0]
@@ -217,24 +226,24 @@ class Command(BaseCommand):
                 Race.objects.update_or_create(
                     race_id=race_id,
                     race_date=race_date,
-                    venue = venue,
-                    race_class = race_class,
-                    race_number = race_number,
-                    track_type = track_type,
-                    distance = distance,
-                    track_condition = track_condition,
-                    direction = direction,
-                    weather = weather,
-                    starters = starters,
-                    bracket = bracket,
-                    horse_number = horse_number,
-                    horse = horse,
-                    gender = gender,
-                    age = age,
-                    jockey_weight = jockey_weight,
-                    jockey = jockey_id,
-                    training_center = training_center,
-                    trainer = trainer_id,
+                    venue=venue,
+                    race_class=race_class,
+                    race_number=race_number,
+                    track_type=track_type,
+                    distance=distance,
+                    track_condition=track_condition,
+                    direction=direction,
+                    weather=weather,
+                    starters=starters,
+                    bracket=bracket,
+                    horse_number=horse_number,
+                    horse=horse,
+                    gender=gender,
+                    age=age,
+                    jockey_weight=jockey_weight,
+                    jockey=jockey_id,
+                    training_center=training_center,
+                    trainer=trainer_id,
                     rank=rank,
                     race_time=race_time,
                     popularity=popularity,
@@ -252,7 +261,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        races = list(set(list(Race.objects.filter(race_date__range=["2020-01-01", "2020-08-31"]).values_list('race_id', flat=True))))
+        races = list(set(list(
+            Race.objects.filter(race_date__range=["2020-01-01", "2020-08-31"]).values_list('race_id', flat=True))))
         for race_id in tqdm(races):
             # if Race.objects.filter(race_id='2021' + str(race_id)[4:]).first() is not None:
             #     continue

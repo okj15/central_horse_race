@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('basic_info', '0002_auto_20210802_1409'),
     ]
@@ -33,8 +32,10 @@ class Migration(migrations.Migration):
                 ('father_mother', models.TextField()),
                 ('mother_mother', models.TextField()),
                 ('breeder', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='basic_info.breeder')),
-                ('father', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sire', to='basic_info.stallion')),
-                ('mother_father', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bms', to='basic_info.stallion')),
+                ('father', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sire',
+                                             to='basic_info.stallion')),
+                ('mother_father', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bms',
+                                                    to='basic_info.stallion')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='basic_info.owner')),
             ],
             options={

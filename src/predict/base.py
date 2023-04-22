@@ -27,7 +27,7 @@ class BasePredict():
         with sqlite3.connect(self.db_path) as conn:
             if self.test_sql_params:
                 df = pd.read_sql_query(self.test_sql, conn, params=self.test_sql_params)
-            else:   
+            else:
                 df = pd.read_sql_query(self.test_sql, conn)
             # 被り列削除
             df = df.loc[:, ~df.columns.duplicated()]
@@ -36,7 +36,7 @@ class BasePredict():
         df['target'] = 1
 
         return df
-    
+
     def calc_distance_difference(self, df):
         df.loc[df['track_type_id'] == 0, 'breed_turf_dist_diff'] = df['distance'] - df['sire_turf_average_distance']
         df.loc[df['track_type_id'] == 1, 'breed_turf_dist_diff'] = df['distance'] - df['sire_dirt_average_distance']
@@ -60,10 +60,11 @@ class BasePredict():
         for fld in field:
             for ft in feature:
                 df.loc[df[f'{ft}_{fld}_runs'] == 0, f'{ft}_{fld}_runs'] = 1
-                df.loc[df['track_type_id'] == field_dict[fld], f'{ft}_field_rate'] = df[f'{ft}_{fld}_wins'] / df[f'{ft}_{fld}_runs']
+                df.loc[df['track_type_id'] == field_dict[fld], f'{ft}_field_rate'] = df[f'{ft}_{fld}_wins'] / df[
+                    f'{ft}_{fld}_runs']
 
                 df.drop([f'{ft}_{fld}_runs', f'{ft}_{fld}_wins'], axis=1, inplace=True)
-        
+
         return df
 
     def extract_race_win_rate(self, df, feature):
@@ -73,7 +74,7 @@ class BasePredict():
                 df[f'{ft}_{race_grade}_rate'] = df[f'{ft}_{race_grade}_wins'] / df[f'{ft}_{race_grade}_runs']
 
                 df.drop([f'{ft}_{race_grade}_runs', f'{ft}_{race_grade}_wins'], axis=1, inplace=True)
-        
+
         return df
 
     def convert_type(self, df):
@@ -93,12 +94,12 @@ class BasePredict():
         return df
 
     def drop_data(self, df):
-        
+
         df.drop([
             # 文字削除
-            'horse_name', # 'jockey_name', 'trainer_name',
+            'horse_name',  # 'jockey_name', 'trainer_name',
             # 固有情報削除
-            'race_id', # 'horse_id', 'jockey_id', 'trainer_id',
+            'race_id',  # 'horse_id', 'jockey_id', 'trainer_id',
             'race_date',
             # 'owner_id', 'father_id', 'father_father_id', 'father_mother_id',
             # 'mother_id', 'mother_father_id', 'mother_mother_id',
@@ -194,7 +195,7 @@ class BasePredict():
 
         # 頻度
         frequency = pd.DataFrame(gbm.feature_importance(importance_type='split'), index=x_train.columns,
-                                columns=['importance'])
+                                 columns=['importance'])
         frequency = frequency.sort_values('importance', ascending=False)
         print(frequency)
 

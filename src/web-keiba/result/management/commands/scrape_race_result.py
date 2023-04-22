@@ -155,11 +155,10 @@ class Command(BaseCommand):
                         }
                     )
 
-
     def insert_breed(self, _id, soup):
 
-        sire_result = soup.find( 'table', {'summary':'産駒成績'} )
-        bms_result = soup.find( 'table', {'summary':'成績'} )
+        sire_result = soup.find('table', {'summary': '産駒成績'})
+        bms_result = soup.find('table', {'summary': '成績'})
 
         for table, breed_results in zip(['sire', 'bms'], [sire_result, bms_result]):
             if breed_results is None or breed_results.find_all('tr') is None:
@@ -243,7 +242,6 @@ class Command(BaseCommand):
                                 'dirt_average_distance': result.find_all('td')[20].text.replace(',', '')
                             }
                         )
-
 
     def add_arguments(self, parser):
         parser.add_argument('tables', nargs='+', type=str)

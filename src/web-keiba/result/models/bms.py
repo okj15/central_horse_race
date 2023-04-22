@@ -27,7 +27,6 @@ class Bms(models.Model):
     dirt_average_distance = models.FloatField(null=True)
     bms = models.ForeignKey(Stallion, on_delete=models.CASCADE, related_name='bms_result')
 
-    
     class Meta:
         verbose_name = '父母成績'
         verbose_name_plural = verbose_name

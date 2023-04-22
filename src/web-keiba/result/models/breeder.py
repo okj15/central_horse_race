@@ -26,7 +26,6 @@ class Breeder(models.Model):
     earnings = models.FloatField()
     breeder = models.ForeignKey(BaseBreeder, on_delete=models.CASCADE)
 
-    
     class Meta:
         verbose_name = '生産者成績'
         verbose_name_plural = verbose_name

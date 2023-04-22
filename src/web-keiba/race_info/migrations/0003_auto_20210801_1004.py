@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('race_info', '0002_direction_gender_trackcondition_tracktype_trainingcenter_weather'),
     ]

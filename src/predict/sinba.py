@@ -168,7 +168,8 @@ class SinbaPredict(BasePredict):
         df = self.calc_distance_difference(df)
 
         # 馬場別勝率
-        df = self.extract_field_win_rate(df, feature=['jockey', 'trainer', 'owner', 'sire', 'bms'], field=['turf', 'dirt'])
+        df = self.extract_field_win_rate(df, feature=['jockey', 'trainer', 'owner', 'sire', 'bms'],
+                                         field=['turf', 'dirt'])
 
         # レースごと勝率
         df = self.extract_race_win_rate(df, feature=['jockey', 'trainer', 'owner'])
@@ -184,12 +185,13 @@ class SinbaPredict(BasePredict):
 
         return df, raw_df
 
+
 def main():
     target_date = '2021-08-21'
     sinba_predict = SinbaPredict()
     df = sinba_predict.read_train_data()
-    train_df = df[(df.race_date!=target_date) & (df.race_rank.notna())]
-    test_df = df[df.race_date==target_date]
+    train_df = df[(df.race_date != target_date) & (df.race_rank.notna())]
+    test_df = df[df.race_date == target_date]
     test_df.target = 1
 
     # test_df = sinba_predict.read_test_data()
@@ -209,4 +211,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -5,8 +5,10 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
-    replaces = [('result', '0001_initial'), ('result', '0002_jockey_jockey_unique'), ('result', '0003_auto_20210805_1757'), ('result', '0004_auto_20210805_1814'), ('result', '0005_auto_20210806_0930'), ('result', '0006_auto_20210806_0931'), ('result', '0007_auto_20210806_0956'), ('result', '0008_auto_20210806_0956')]
+    replaces = [('result', '0001_initial'), ('result', '0002_jockey_jockey_unique'),
+                ('result', '0003_auto_20210805_1757'), ('result', '0004_auto_20210805_1814'),
+                ('result', '0005_auto_20210806_0930'), ('result', '0006_auto_20210806_0931'),
+                ('result', '0007_auto_20210806_0956'), ('result', '0008_auto_20210806_0956')]
 
     initial = True
 
@@ -179,7 +181,8 @@ class Migration(migrations.Migration):
                 ('quinella_rate', models.FloatField()),
                 ('show_rate', models.FloatField()),
                 ('get_prize', models.FloatField()),
-                ('sire', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sire_result', to='basic_info.stallion')),
+                ('sire', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sire_result',
+                                           to='basic_info.stallion')),
             ],
             options={
                 'verbose_name': '種牡馬成績',
@@ -210,7 +213,8 @@ class Migration(migrations.Migration):
                 ('quinella_rate', models.FloatField()),
                 ('show_rate', models.FloatField()),
                 ('get_prize', models.FloatField()),
-                ('bms', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bms_result', to='basic_info.stallion')),
+                ('bms', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bms_result',
+                                          to='basic_info.stallion')),
             ],
             options={
                 'verbose_name': '父母成績',

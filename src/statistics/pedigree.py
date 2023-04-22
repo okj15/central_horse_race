@@ -8,6 +8,7 @@ import pandas as pd
 db_path = 'data/keiba.db'
 race_id = '202105030105'
 
+
 def get_race_data():
     sql = '''
         SELECT *
@@ -19,8 +20,8 @@ def get_race_data():
             race_id = ?;
     '''
     with sqlite3.connect(db_path) as conn:
-        df = pd.read_sql_query(sql, conn, params=(race_id, ))
-    
+        df = pd.read_sql_query(sql, conn, params=(race_id,))
+
     return df
 
 
@@ -33,10 +34,11 @@ def get_breed_data(horse_names, breed_ids):
     '''
     with sqlite3.connect(db_path) as conn:
         for horse_name, breed_id in zip(horse_names, breed_ids):
-            df = pd.read_sql_query(sql, conn, params=(breed_id, ))
+            df = pd.read_sql_query(sql, conn, params=(breed_id,))
             print(horse_name, df.breed_turf_race_win.iloc[0], df.breed_win_rate.iloc[0])
 
     return df
+
 
 def get_bms_data(horse_names, breed_ids):
     sql = '''
@@ -47,10 +49,11 @@ def get_bms_data(horse_names, breed_ids):
     '''
     with sqlite3.connect(db_path) as conn:
         for horse_name, breed_id in zip(horse_names, breed_ids):
-            df = pd.read_sql_query(sql, conn, params=(breed_id, ))
+            df = pd.read_sql_query(sql, conn, params=(breed_id,))
             print(horse_name, df.breed_turf_race_win.iloc[0], df.breed_win_rate.iloc[0])
 
     return df
+
 
 def main():
     # 該当レースの取得
@@ -66,6 +69,7 @@ def main():
 
     # bms情報取得
     get_breed_data(horse_names, bms_ids)
+
 
 if __name__ == '__main__':
     main()

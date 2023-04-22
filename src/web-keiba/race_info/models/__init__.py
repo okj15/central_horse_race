@@ -6,7 +6,6 @@ from race_info.models.weather import Weather
 from race_info.models.gender import Gender
 from race_info.models.training_center import TrainingCenter
 
-
 __all__ = [
     'Venue',
     'TrackType',

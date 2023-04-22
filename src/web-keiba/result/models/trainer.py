@@ -26,7 +26,6 @@ class Trainer(models.Model):
     earnings = models.FloatField()
     trainer = models.ForeignKey(BaseTrainer, on_delete=models.CASCADE)
 
-    
     class Meta:
         verbose_name = '調教師成績'
         verbose_name_plural = verbose_name

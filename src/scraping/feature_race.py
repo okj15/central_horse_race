@@ -128,9 +128,11 @@ class FeatureRaceScraping(BaseScraping):
         # 距離
         dist = soup.find_all('div', class_='RaceData01')[0].text.split()[2][1:-1]
         # 馬場状態
-        field_condition = convert_field_condition_to_number(soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[1])
+        field_condition = convert_field_condition_to_number(
+            soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[1])
         # 左右周り
-        l_or_r = convert_l_or_r_to_number(soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')', ''))
+        l_or_r = convert_l_or_r_to_number(
+            soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')', ''))
         # 天気
         weather = convert_weather_to_number(soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1])
         # 出走馬数
@@ -216,7 +218,6 @@ def main():
         # html保存
         with open(f'data/html/race_realtime/20210801/{race_id}.html', 'w') as f:
             f.write(str(soup))
-
 
         # 取得したhtmlからpandas形式のデータに変換する
         race_info = feature_race.convert_html_to_df(soup, '2021', race_id)

@@ -39,7 +39,8 @@ class OwnerScraping(BaseScraping):
             if table.find('td') is None:
                 continue
             if table.find('td').text == '累計':
-                total_info = [data.text.replace(',', '') if data.text != '' and data.text[0] != '.' else data.text.replace(
+                total_info = [data.text.replace(',', '') if data.text != '' and data.text[
+                    0] != '.' else data.text.replace(
                     '.', '0.') for data in table.find_all('td')][2:-1]
                 break
 
@@ -52,9 +53,10 @@ class OwnerScraping(BaseScraping):
                 break
 
             if table.find('td').text.isdecimal() and int(table.find('td').text) >= 2011:
-                each_info = [owner_id, int(table.find('td').text)+1]
-                each_info.extend([data.text.replace(',', '') if data.text != '' and data.text[0] != '.' else data.text.replace(
-                    '.', '0.') for data in table.find_all('td')][1:-1])
+                each_info = [owner_id, int(table.find('td').text) + 1]
+                each_info.extend(
+                    [data.text.replace(',', '') if data.text != '' and data.text[0] != '.' else data.text.replace(
+                        '.', '0.') for data in table.find_all('td')][1:-1])
                 each_info.extend(total_info)
                 owner_info.append(each_info)
 

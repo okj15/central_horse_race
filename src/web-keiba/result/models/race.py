@@ -3,6 +3,7 @@ from django.db import models
 from race_info.models import Venue, TrackType, TrackCondition, Direction, Weather, Gender, TrainingCenter
 from basic_info.models import Horse, Jockey, Trainer
 
+
 class Race(models.Model):
     race_id = models.IntegerField()
     race_date = models.DateField()
@@ -35,7 +36,7 @@ class Race(models.Model):
     trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
     horse_weight = models.IntegerField(null=True)
     horse_weight_change = models.IntegerField(null=True)
-    
+
     class Meta:
         verbose_name = 'レース成績'
         verbose_name_plural = verbose_name

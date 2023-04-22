@@ -20,7 +20,7 @@ class Command(BaseCommand):
         html.encoding = 'EUC-JP'
         soup = BeautifulSoup(html.text, 'html.parser')
         with open(f'/work/data/html/{target}/{_id}.html', 'w') as f:
-                f.write(str(soup))
+            f.write(str(soup))
 
         return soup
 
@@ -33,7 +33,7 @@ class Command(BaseCommand):
             html.encoding = 'EUC-JP'
             soup = BeautifulSoup(html.text, 'html.parser')
             with open(f'/work/data/html/race/2021/{race_id}.html', 'w') as f:
-                    f.write(str(soup))
+                f.write(str(soup))
 
     def scrape_and_save(self, base_race_id):
         for i in tqdm(range(1, 13)):
@@ -41,9 +41,12 @@ class Command(BaseCommand):
             soup = BeautifulSoup(open(f'/work/data/html/race/2021/{race_id}.html'), 'html.parser')
 
             # 馬場状態
-            track_condition = TrackCondition.objects.filter(name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[1]).first()
+            track_condition = TrackCondition.objects.filter(
+                name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[
+                    1]).first()
             # 天気
-            weather = Weather.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
+            weather = Weather.objects.filter(
+                name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
 
             table = soup.find('table', class_='RaceTable01 RaceCommon_Table ResultRefund Table_Show_All')
             for tr in table.find_all('tr', class_='HorseList'):
@@ -84,7 +87,8 @@ class Command(BaseCommand):
                 horse_weight = tr.find('td', class_='Weight').text.split()[0].split('(')[0]
                 # 馬体重増減
                 try:
-                    horse_weight_change = int(tr.find('td', class_='Weight').text.split()[0].split('(')[1].replace(')', ''))
+                    horse_weight_change = int(
+                        tr.find('td', class_='Weight').text.split()[0].split('(')[1].replace(')', ''))
                 except:
                     horse_weight_change = 0
 
@@ -98,7 +102,7 @@ class Command(BaseCommand):
 
                 Race.objects.update_or_create(
                     race_id=race_id,
-                    horse = horse,
+                    horse=horse,
                     defaults={
                         'track_condition': track_condition,
                         'weather': weather,
@@ -114,7 +118,7 @@ class Command(BaseCommand):
                         'horse_weight_change': horse_weight_change,
                         'race_time': race_time
                     }
-                )                
+                )
 
     def add_arguments(self, parser):
         parser.add_argument('base_race_id', nargs='+', type=str)

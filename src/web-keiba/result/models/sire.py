@@ -27,7 +27,6 @@ class Sire(models.Model):
     dirt_average_distance = models.FloatField()
     sire = models.ForeignKey(Stallion, on_delete=models.CASCADE, related_name='sire_result')
 
-    
     class Meta:
         verbose_name = '種牡馬成績'
         verbose_name_plural = verbose_name

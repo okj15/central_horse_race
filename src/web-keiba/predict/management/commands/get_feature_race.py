@@ -20,7 +20,7 @@ class Command(BaseCommand):
         html.encoding = 'EUC-JP'
         soup = BeautifulSoup(html.text, 'html.parser')
         with open(f'/work/data/html/{target}/{_id}.html', 'w') as f:
-                f.write(str(soup))
+            f.write(str(soup))
 
         return soup
 
@@ -33,7 +33,7 @@ class Command(BaseCommand):
             html.encoding = 'EUC-JP'
             soup = BeautifulSoup(html.text, 'html.parser')
             with open(f'/work/data/html/race/2021/{race_id}.html', 'w') as f:
-                    f.write(str(soup))
+                f.write(str(soup))
 
     def scrape_and_save_horse(self, soup, horse_id, horse_name):
         # 共通
@@ -108,15 +108,21 @@ class Command(BaseCommand):
             # レース番号
             race_number = soup.find_all('span', class_='RaceNum')[0].text.split()[0].replace('R', '')
             # 馬場
-            track_type =  TrackType.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[2][0]).first()
+            track_type = TrackType.objects.filter(
+                name=soup.find_all('div', class_='RaceData01')[0].text.split()[2][0]).first()
             # 距離
             distance = soup.find_all('div', class_='RaceData01')[0].text.split()[2][1:-1]
             # 馬場状態
-            track_condition = TrackCondition.objects.filter(name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[1]).first()
+            track_condition = TrackCondition.objects.filter(
+                name=soup.find_all('span', class_=lambda value: value and value.startswith('Item'))[0].text.split(':')[
+                    1]).first()
             # 左右周り
-            direction = Direction.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')', '')).first()
+            direction = Direction.objects.filter(
+                name=soup.find_all('div', class_='RaceData01')[0].text.split()[3].replace('(', '').replace(')',
+                                                                                                           '')).first()
             # 天気
-            weather = Weather.objects.filter(name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
+            weather = Weather.objects.filter(
+                name=soup.find_all('div', class_='RaceData01')[0].text.split()[-3].split(':')[1]).first()
             # 出走馬数
             starters = len(soup.find('table', class_='Shutuba_Table').find_all('span', class_='HorseName')) - 1
 
@@ -132,7 +138,8 @@ class Command(BaseCommand):
                 horse_number = tr.find('td', class_=lambda value: value and value.startswith('Umaban')).text.split()[0]
                 # 馬ID
                 horse_id = tr.find('span', class_='HorseName').find('a').get('href').split('/')[-1]
-                horse = Horse.objects.filter(id=tr.find('span', class_='HorseName').find('a').get('href').split('/')[-1]).first()
+                horse = Horse.objects.filter(
+                    id=tr.find('span', class_='HorseName').find('a').get('href').split('/')[-1]).first()
 
                 # horse情報なければ追加
                 if horse is None:
@@ -148,11 +155,14 @@ class Command(BaseCommand):
                 # 斤量
                 jockey_weight = float(tr.select("[class='Txt_C']")[0].text)
                 # 騎手ID
-                jockey_id = Jockey.objects.filter(id=tr.find('td', class_='Jockey').find('a').get('href').split('/')[-2]).first()
+                jockey_id = Jockey.objects.filter(
+                    id=tr.find('td', class_='Jockey').find('a').get('href').split('/')[-2]).first()
                 # トレーニングセンター
-                training_center = TrainingCenter.objects.filter(name=tr.find('td', class_='Trainer').find('span').text).first()
+                training_center = TrainingCenter.objects.filter(
+                    name=tr.find('td', class_='Trainer').find('span').text).first()
                 # 調教師ID
-                trainer_id = Trainer.objects.filter(id=tr.find('td', class_='Trainer').find('a').get('href').split('/')[-2]).first()
+                trainer_id = Trainer.objects.filter(
+                    id=tr.find('td', class_='Trainer').find('a').get('href').split('/')[-2]).first()
 
                 Race.objects.update_or_create(
                     race_id=race_id,
@@ -175,7 +185,7 @@ class Command(BaseCommand):
                     jockey=jockey_id,
                     training_center=training_center,
                     trainer=trainer_id
-                )                
+                )
 
     def add_arguments(self, parser):
         parser.add_argument('base_race_id', nargs='+', type=str)

@@ -6,7 +6,6 @@ from result.models.sire import Sire
 from result.models.bms import Bms
 from result.models.race import Race
 
-
 __all__ = [
     'Jockey',
     'Owner',

@@ -18,13 +18,13 @@ from django.urls import path, include
 from .views import Home
 from django.conf import settings
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home.as_view(), name='home'),
-    path('predict/', include('predict.urls')), 
+    path('predict/', include('predict.urls')),
 ]
 
 if settings.DEBUG:
-    import debug_toolbar 
+    import debug_toolbar
+
     urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]

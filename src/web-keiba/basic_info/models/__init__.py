@@ -5,7 +5,6 @@ from basic_info.models.breeder import Breeder
 from basic_info.models.stallion import Stallion
 from basic_info.models.horse import Horse
 
-
 __all__ = [
     'Owner',
     'Trainer',

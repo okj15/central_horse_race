@@ -6,8 +6,8 @@ from .jockey import get_jockey_result
 from .horse import get_horse_result
 from .sire import get_sire_result
 
-def index(request, *args, **kwargs):
 
+def index(request, *args, **kwargs):
     # レース情報取得
     target_race = Race.objects.filter(race_id=request.GET['id']).order_by('race_id', 'horse_number')
 

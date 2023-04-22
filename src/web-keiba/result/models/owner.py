@@ -26,7 +26,6 @@ class Owner(models.Model):
     earnings = models.FloatField()
     owner = models.ForeignKey(BaseOwner, on_delete=models.CASCADE)
 
-    
     class Meta:
         verbose_name = '馬主成績'
         verbose_name_plural = verbose_name
