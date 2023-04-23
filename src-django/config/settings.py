@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'predict',
     'race_info',
     'basic_info',
-    # 'result'
+    'result'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': DATA_DIR / 'data/central.db',
+        'NAME': 'data/central.db',
     }
 }
 

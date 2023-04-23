@@ -3,7 +3,7 @@ from django.db.models import base
 
 from django.shortcuts import render
 from result.models import Race
-from basic_info.models import Jockey
+from basic_info.models.jockey import Jockey
 
 
 def index(request, *args, **kwargs):

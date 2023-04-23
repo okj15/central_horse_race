@@ -1,6 +1,6 @@
 from django.db import models
 
-from basic_info.models import Jockey as BaseJockey
+from basic_info.models.jockey import Jockey as BaseJockey
 
 
 class Jockey(models.Model):

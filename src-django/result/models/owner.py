@@ -1,6 +1,6 @@
 from django.db import models
 
-from basic_info.models import Owner as BaseOwner
+from basic_info.models.owner import Owner as BaseOwner
 
 
 class Owner(models.Model):

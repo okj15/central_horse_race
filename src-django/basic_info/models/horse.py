@@ -1,6 +1,8 @@
 from django.db import models
 
-from basic_info.models import Owner, Breeder, Stallion
+from basic_info.models.owner import Owner
+from basic_info.models.breeder import Breeder
+from basic_info.models.stallion import Stallion
 
 
 class Horse(models.Model):

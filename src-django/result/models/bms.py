@@ -1,6 +1,6 @@
 from django.db import models
 
-from basic_info.models import Stallion
+from basic_info.models.stallion import Stallion
 
 
 class Bms(models.Model):

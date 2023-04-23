@@ -1,6 +1,6 @@
 from django.db import models
 
-from basic_info.models import Trainer as BaseTrainer
+from basic_info.models.trainer import Trainer as BaseTrainer
 
 
 class Trainer(models.Model):

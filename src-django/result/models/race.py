@@ -1,7 +1,9 @@
 from django.db import models
 
 from race_info.models import Venue, TrackType, TrackCondition, Direction, Weather, Gender, TrainingCenter
-from basic_info.models import Horse, Jockey, Trainer
+from basic_info.models.horse import Horse
+from basic_info.models.jockey import Jockey
+from basic_info.models.trainer import Trainer
 
 
 class Race(models.Model):

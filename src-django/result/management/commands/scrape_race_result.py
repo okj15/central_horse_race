@@ -2,11 +2,11 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 
 from result.models import Jockey, Owner, Trainer, Breeder, Sire, Bms
-from basic_info.models import Jockey as BaseJockey
-from basic_info.models import Owner as BaseOwner
-from basic_info.models import Trainer as BaseTrainer
-from basic_info.models import Breeder as BaseBreeder
-from basic_info.models import Stallion
+from basic_info.models.jockey import Jockey as BaseJockey
+from basic_info.models.owner import Owner as BaseOwner
+from basic_info.models.trainer import Trainer as BaseTrainer
+from basic_info.models.breeder import Breeder as BaseBreeder
+from basic_info.models.stallion import Stallion
 
 from bs4 import BeautifulSoup
 from pathlib import Path

@@ -1,6 +1,6 @@
 from django.db import models
 
-from basic_info.models import Breeder as BaseBreeder
+from basic_info.models.breeder import Breeder as BaseBreeder
 
 
 class Breeder(models.Model):
