@@ -4,7 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 import sqlite3
 
-from base import BaseScraping
+from base_scraper import BaseScraping
 
 
 class OwnerScraping(BaseScraping):

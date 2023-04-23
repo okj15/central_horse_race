@@ -3,7 +3,7 @@ import pathlib
 import pandas as pd
 from tqdm import tqdm
 
-from base import BaseScraping
+from base_scraper import BaseScraping
 
 
 def convert_place_to_number(place):

@@ -4,7 +4,7 @@ import sqlite3
 import pandas as pd
 from tqdm import tqdm
 
-from base import BaseScraping
+from base_scraper import BaseScraping
 
 
 class HorseScraping(BaseScraping):
