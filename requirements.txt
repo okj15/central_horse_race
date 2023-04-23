@@ -12,3 +12,6 @@ beautifulsoup4
 requests
 sklearn
 django
+djangorestframework
+django-debug-toolbar
+django-bootstrap4

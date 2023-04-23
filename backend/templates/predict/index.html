@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}" />
+
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+  <!-- <script src='main.js'></script> -->
+</head>
+<body>
+  {% block content %}
+  <h2>{{ target_race.0.race_date }} {{ target_race.0.venue }} {{ target_race.0.race_number }}レース</h2>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a href='#contents1' class="nav-link active" data-toggle="tab">レース情報</a>
+    </li>
+    <li class="nav-item">
+      <a href='#contents2' class="nav-link" data-toggle="tab">騎手成績</a>
+    </li>
+    <li class="nav-item">
+      <a href='#contents3' class="nav-link" data-toggle="tab">競走馬成績</a>
+    </li>
+    <li class="nav-item">
+      <a href='#contents4' class="nav-link" data-toggle="tab">産駒成績</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="contents1" class="tab-pane active">
+      {% include "predict/base_race.html" %}
+    </div>
+    <div id="contents2" class="tab-pane">
+      {% include "predict/base_jockey.html" %}
+    </div>
+    <div id="contents3" class="tab-pane">
+      {% include "predict/base_horse.html" %}
+    </div>
+    <div id="contents4" class="tab-pane">
+      {% include "predict/base_sire.html" %}
+    </div>
+  </div>
+  {% endblock %}
+</body>
+</html>
