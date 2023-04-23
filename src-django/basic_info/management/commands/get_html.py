@@ -1,11 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-from basic_info.models import Owner, Jockey, Trainer
-from predict.models import Race, RaceRealtime, HorseBase
-
 from bs4 import BeautifulSoup
-from pathlib import Path
 from tqdm import tqdm
 
 import time
