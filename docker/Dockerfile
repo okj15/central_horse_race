@@ -11,6 +11,7 @@ COPY ./ ./
 RUN apt-get update && apt-get install -y \
   gcc \
   git \
+  sqlite3 \
   procps
 
 RUN pip install --no-cache-dir --upgrade pip
