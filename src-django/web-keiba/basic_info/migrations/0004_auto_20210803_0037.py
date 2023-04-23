@@ -5,6 +5,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
         ('basic_info', '0003_horse_stallion'),
     ]
@@ -18,14 +19,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='horse',
             name='father',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='sire',
-                                    to='basic_info.stallion'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='sire', to='basic_info.stallion'),
         ),
         migrations.AlterField(
             model_name='horse',
             name='mother_father',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='bms',
-                                    to='basic_info.stallion'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='bms', to='basic_info.stallion'),
         ),
         migrations.AlterField(
             model_name='horse',

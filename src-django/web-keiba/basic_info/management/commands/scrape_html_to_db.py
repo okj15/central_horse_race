@@ -59,6 +59,7 @@ class Command(BaseCommand):
             mother_mother=mother_mother_id
         )
 
+
     def add_arguments(self, parser):
         parser.add_argument('tables', nargs='+', type=str)
         parser.add_argument('id', nargs='+', type=str)

@@ -21,6 +21,7 @@ class Command(BaseCommand):
         html.encoding = 'EUC-JP'
         return BeautifulSoup(html.text, 'html.parser')
 
+
     def add_arguments(self, parser):
         parser.add_argument('tables', nargs='+', type=str)
         parser.add_argument('id', nargs='+', type=str)

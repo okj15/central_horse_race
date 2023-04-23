@@ -5,7 +5,7 @@ import time
 from bs4 import BeautifulSoup
 
 
-class BaseScraping():
+class BaseScraping(object):
     def __init__(self):
         self.db_path = 'data/central.db'
         self.table_name = ''
