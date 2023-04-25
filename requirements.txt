@@ -10,7 +10,7 @@ lightgbm
 optuna
 beautifulsoup4
 requests
-sklearn
+scikit-learn
 django
 djangorestframework
 django-debug-toolbar

@@ -248,12 +248,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         table = options['tables'][0]
 
-        pathes = Path(f'{settings.DATA_DIR}/data/html/{table}/')
+        paths = Path(f'{settings.DATA_DIR}/data/html/{table}/')
         if table in ['sire', 'bms']:
-            pathes = Path(f'{settings.DATA_DIR}/data/html/stallion/')
-        for path in tqdm(pathes.glob('*')):
+            paths = Path(f'{settings.DATA_DIR}/data/html/stallion/')
+        for path in tqdm(paths.glob('*')):
+            _id = path.stem
             try:
-                _id = path.stem
                 soup = BeautifulSoup(open(path), 'html.parser')
 
                 if table in ['owner', 'jockey', 'trainer', 'breeder']:
