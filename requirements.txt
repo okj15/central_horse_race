@@ -16,3 +16,4 @@ djangorestframework
 django-debug-toolbar
 django-bootstrap4
 selenium
+django-cors-headers
