@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}" />
+
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+  <!-- <script src='main.js'></script> -->
+</head>
+
+<body>
+
+  <ul class="nav nav-tabs">
+    {% for result in results %}
+      <li class="nav-item">
+        {% if forloop.first %}
+          <a href="#contents{{ forloop.counter }}" class="nav-link active" data-toggle="tab">{{forloop.counter}}R</a>
+        {% else %}
+          <a href="#contents{{ forloop.counter }}" class="nav-link" data-toggle="tab">{{forloop.counter}}R</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="tab-content">
+
+    {% for result in results %}
+      {% if forloop.first %}
+        <div id="contents{{forloop.counter}}" class="tab-pane active">
+      {% else %}
+        <div id="contents{{forloop.counter}}" class="tab-pane">
+      {% endif %}
+
+      {% for k, v in result.items %}
+        <h4>{{ k }}</h4>
+        {% for jockey, rate in v.items %}
+          {{jockey}}: {{rate}}
+        {% endfor %}
+      {% endfor %}
+
+      </div>
+    {% endfor %}
+      
+
+      <!-- <h4>未勝利戦勝率 芝</h4>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">騎手名</th>
+            <th scope="col">勝利数</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for k, v in turf_nowin_jockey.items %}
+          <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table> -->
+
+      <!-- <h4>未勝利戦勝率 ダート</h4>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">騎手名</th>
+            <th scope="col">勝利数</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for k, v in dirt_nowin_jockey.items %}
+          <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div id="contents2" class="tab-pane">
+      <h4>開催地勝率 芝</h4>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">騎手名</th>
+            <th scope="col">勝利数</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for k, v in turf_venue_jockey.items %}
+          <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h4>開催地勝率 ダート</h4>
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">騎手名</th>
+            <th scope="col">勝利数</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for k, v in dirt_venue_jockey.items %}
+          <tr>
+            <td>{{ k }}</td>
+            <td>{{ v }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div> -->
+
+
+  </div>
+
+</body>
+
+</html>

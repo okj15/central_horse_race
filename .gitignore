@@ -9,10 +9,13 @@
 *.iml
 
 # model
-model
+training-model
 
 # data
 data
+
+# 予測結果など一時的に保存するファイル
+tmp
 
 # notebook
 notebook/.ipynb_checkpoints
