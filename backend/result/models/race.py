@@ -58,37 +58,37 @@ class Race(models.Model):
         (6, '雪'),
     )
 
-    race_id = models.IntegerField()
-    race_date = models.DateField()
-    venue = models.IntegerField(null=True, choices=VENUE)
-    race_class = models.IntegerField()
-    race_number = models.IntegerField()
-    track_type = models.IntegerField(null=True, choices=TRACK_TYPE)
-    distance = models.IntegerField()
-    track_condition = models.IntegerField(null=True, choices=TRACK_CONDITION)
-    direction = models.IntegerField(null=True, choices=DIRECTION)
-    weather = models.IntegerField(null=True, choices=WEATHER)
-    starters = models.IntegerField()
-    rank = models.IntegerField(null=True)
-    bracket = models.IntegerField(null=True)
-    horse_number = models.IntegerField(null=True)
-    horse = models.ForeignKey(Horse, on_delete=models.SET_NULL, null=True)
-    gender = models.IntegerField(null=True, choices=GENDER)
-    age = models.IntegerField()
-    jockey_weight = models.IntegerField(null=True)
-    jockey = models.ForeignKey(Jockey, on_delete=models.SET_NULL, null=True)
-    race_time = models.FloatField(null=True)
-    popularity = models.FloatField(null=True)
-    odds = models.FloatField(null=True)
-    three_halon = models.FloatField(null=True)
-    first_corner_rank = models.FloatField(null=True)
-    second_corner_rank = models.FloatField(null=True)
-    third_corner_rank = models.FloatField(null=True)
-    fourth_corner_rank = models.FloatField(null=True)
-    training_center = models.IntegerField(null=True, choices=TRAINING_CENTER)
-    trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)
-    horse_weight = models.IntegerField(null=True)
-    horse_weight_change = models.IntegerField(null=True)
+    race_id = models.IntegerField()                                             # レースID
+    race_date = models.DateField()                                              # 開催日
+    venue = models.IntegerField(null=True, choices=VENUE)                       # 開催場所
+    race_class = models.IntegerField()                                          # レースの格付け
+    race_number = models.IntegerField()                                         # レース番号
+    track_type = models.IntegerField(null=True, choices=TRACK_TYPE)             # 芝orダート
+    distance = models.IntegerField()                                            # レースの距離
+    track_condition = models.IntegerField(null=True, choices=TRACK_CONDITION)   # 馬場状態
+    direction = models.IntegerField(null=True, choices=DIRECTION)               # 右回りor左回りor直線
+    weather = models.IntegerField(null=True, choices=WEATHER)                   # 天気
+    starters = models.IntegerField()                                            # 出走頭数
+    rank = models.IntegerField(null=True)                                       # 着順
+    bracket = models.IntegerField(null=True)                                    # 枠番
+    horse_number = models.IntegerField(null=True)                               # 馬番
+    horse = models.ForeignKey(Horse, on_delete=models.SET_NULL, null=True)      # 馬名
+    gender = models.IntegerField(null=True, choices=GENDER)                     # 性別
+    age = models.IntegerField()                                                 # 年齢
+    jockey_weight = models.IntegerField(null=True)                              # 騎手の体重
+    jockey = models.ForeignKey(Jockey, on_delete=models.SET_NULL, null=True)    # 騎手
+    race_time = models.FloatField(null=True)                                    # タイム
+    popularity = models.FloatField(null=True)                                   # 人気
+    odds = models.FloatField(null=True)                                         # オッズ
+    three_halon = models.FloatField(null=True)                                  # 3ハロン 時間
+    first_corner_rank = models.FloatField(null=True)                            # 1コーナー順位
+    second_corner_rank = models.FloatField(null=True)                           # 2コーナー順位
+    third_corner_rank = models.FloatField(null=True)                            # 3コーナー順位
+    fourth_corner_rank = models.FloatField(null=True)                           # 4コーナー順位
+    training_center = models.IntegerField(null=True, choices=TRAINING_CENTER)   # 調教師の所属
+    trainer = models.ForeignKey(Trainer, on_delete=models.SET_NULL, null=True)  # 調教師
+    horse_weight = models.IntegerField(null=True)                               # 馬体重
+    horse_weight_change = models.IntegerField(null=True)                        # 馬体重の変化
 
     class Meta:
         verbose_name = 'レース成績'

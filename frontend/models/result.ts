@@ -6,10 +6,15 @@ export async function fetchApiData() {
     for (const obj of data) {
         raceResults.push({
             id: obj.id,
+            bracket: obj.bracket,
             horseNumber: obj.horse_number,
             horse: obj.horse,
             getGenderDisplay: obj.get_gender_display,
             age: obj.age,
+            jockeyWeight: obj.jockey_weight,
+            raceTime: obj.race_time,
+            popularity: obj.popularity,
+            odds: obj.odds,
         });
     }
 
@@ -18,16 +23,26 @@ export async function fetchApiData() {
 
 type RaceResultResponse = {
     id: number;
+    bracket: number;
     horse_number: number;
     horse: string;
     get_gender_display: string;
     age: number;
+    jockey_weight: number;
+    race_time: string;
+    popularity: number;
+    odds: number;
 }
 
 export type RaceResult = {
     id: number;
+    bracket: number;
     horseNumber: number;
     horse: string;
     getGenderDisplay: string;
     age: number;
+    jockeyWeight: number;
+    raceTime: string;
+    popularity: number;
+    odds: number;
 }

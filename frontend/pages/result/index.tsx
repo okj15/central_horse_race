@@ -1,54 +1,63 @@
 import {useEffect, useState} from 'react';
-import {fetchApiData} from '@/models/result';
-import {RaceResult} from '@/models/result';
+import {fetchApiData, RaceResult} from '@/models/result';
+import Table from 'react-bootstrap/Table';
+import RaceInfo from "@/components/organisms/raceInfo";
 
 
 function ResultIndex() {
-    const [apiData, setApiData] = useState<RaceResult[]>([]);
+    const [apiRaceResult, setApiRaceResult] = useState<RaceResult | null>(null);
+    const [apiRaceResults, setApiRaceResults] = useState<RaceResult[]>([]);
 
     useEffect(() => {
         async function getData() {
             const data: RaceResult[] = await fetchApiData();
-            setApiData(data);
+            setApiRaceResults(data);
+            if (data.length > 0) {
+                setApiRaceResult(data[0]);
+            }
         }
 
         getData().then(r => console.log(r));
     }, []);
 
-    // @ts-ignore
     return (
-        <table>
-            <thead>
-            <tr>
-                <th>馬番</th>
-                <th>馬名</th>
-                <th>性別</th>
-                <th>年齢</th>
-            </tr>
-            {/*<th>斤量</th>*/}
-            {/*<th>騎手</th>*/}
-            {/*<th>タイム</th>*/}
-            {/*<th>着差</th>*/}
-            {/*<th>通過</th>*/}
-            {/*<th>上り</th>*/}
-            {/*<th>単勝</th>*/}
-            {/*<th>人気</th>*/}
-            {/*<th>馬体重</th>*/}
-            {/*<th>調教師</th>*/}
-            {/*<th>馬主</th>*/}
-            {/*<th>賞金</th>*/}
-            </thead>
-            <tbody>
-            {apiData.map((item: RaceResult) => (
-                <tr key={item.id}>
-                    <td>{item.horseNumber || 'a'}</td>
-                    <td>{item.horse}</td>
-                    <td>{item.getGenderDisplay}</td>
-                    <td>{item.age}</td>
+        <div>
+            <RaceInfo raceResult={apiRaceResult} />
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>枠</th>
+                    <th>馬番</th>
+                    <th>馬名</th>
+                    <th>性別</th>
+                    <th>年齢</th>
+                    <th>斤量</th>
+                    <th>レースタイム</th>
+                    <th>人気</th>
+                    <th>オッズ</th>
+                    {/*<th>騎手</th>*/}
+                    {/*<th>馬主</th>*/}
+                    {/*<th>調教師</th>*/}
+                    {/*<th>生産者</th>*/}
                 </tr>
-            ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {apiRaceResults.map((item: RaceResult) => (
+                    <tr key={item.id}>
+                        <td>{item.bracket}</td>
+                        <td>{item.horseNumber}</td>
+                        <td>{item.horse}</td>
+                        <td>{item.getGenderDisplay}</td>
+                        <td>{item.age}</td>
+                        <td>{item.jockeyWeight}</td>
+                        <td>{item.raceTime}</td>
+                        <td>{item.popularity}</td>
+                        <td>{item.odds}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 
