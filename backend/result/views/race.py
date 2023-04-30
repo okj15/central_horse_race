@@ -1,15 +1,24 @@
 from rest_framework import generics
-from rest_framework import exceptions
 
 from ..models import Race
-from ..serializers.race import RaceSerializer
+from ..serializers.race import RaceResultSerializer, RaceInfoSerializer
 
 
-class RaceView(generics.ListAPIView):
-    serializer_class = RaceSerializer
+class RaceInfoView(generics.ListAPIView):
+    serializer_class = RaceInfoSerializer
 
     def get_queryset(self):
+        query = self.request.query_params.get('race', None)
+        if query is None:
+            query = '201601010101'
 
+        return [Race.objects.filter(race_id=query).first()]
+
+
+class RaceResultView(generics.ListAPIView):
+    serializer_class = RaceResultSerializer
+
+    def get_queryset(self):
         query = self.request.query_params.get('race', None)
         if query is None:
             query = '201601010101'
@@ -18,4 +27,3 @@ class RaceView(generics.ListAPIView):
 
     def filter_queryset(self, queryset):
         return queryset
-
