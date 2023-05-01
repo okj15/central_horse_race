@@ -1,14 +1,15 @@
-from basic_info.models.jockey import Jockey as BaseJockey
 from django.db import models
 
+from .master import Master
 
-class Jockey(models.Model):
+
+class BmsResult(models.Model):
     year = models.IntegerField()
     rank = models.IntegerField()
-    first = models.IntegerField()
-    second = models.IntegerField()
-    third = models.IntegerField()
-    unplaced = models.IntegerField()
+    foals = models.IntegerField()
+    winners = models.IntegerField()
+    runs = models.IntegerField()
+    wins = models.IntegerField()
     graded_runs = models.IntegerField()
     graded_wins = models.IntegerField()
     special_runs = models.IntegerField()
@@ -20,20 +21,22 @@ class Jockey(models.Model):
     dirt_runs = models.IntegerField()
     dirt_wins = models.IntegerField()
     win_rate = models.FloatField()
-    quinella_rate = models.FloatField()
-    show_rate = models.FloatField()
+    ei = models.FloatField()
     earnings = models.FloatField()
-    jockey = models.ForeignKey(BaseJockey, on_delete=models.CASCADE)
+    turf_average_distance = models.FloatField(null=True)
+    dirt_average_distance = models.FloatField(null=True)
+
+    bms = models.ForeignKey(Master, on_delete=models.CASCADE, related_name='bms_result')
 
     class Meta:
-        verbose_name = '騎手成績'
+        verbose_name = '父母成績'
         verbose_name_plural = verbose_name
         constraints = [
             models.UniqueConstraint(
-                fields=['year', 'jockey'],
-                name="jockey_unique"
+                fields=['year', 'bms'],
+                name="bms_result_unique"
             )
         ]
 
     def __str__(self):
-        return self.jockey.name
+        return self.bms.name

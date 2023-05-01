@@ -1,15 +1,16 @@
 from pathlib import Path
 
+from bs4 import BeautifulSoup
+from django.conf import settings
+from django.core.management.base import BaseCommand
+from tqdm import tqdm
+
 from basic_info.models.breeder import Breeder as BaseBreeder
 from basic_info.models.jockey import Jockey as BaseJockey
 from basic_info.models.owner import Owner as BaseOwner
 from basic_info.models.stallion import Stallion
 from basic_info.models.trainer import Trainer as BaseTrainer
-from bs4 import BeautifulSoup
-from django.conf import settings
-from django.core.management.base import BaseCommand
 from result.models import Jockey, Owner, Trainer, Breeder, Sire, Bms
-from tqdm import tqdm
 
 
 class Command(BaseCommand):

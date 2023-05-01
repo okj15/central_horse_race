@@ -1,8 +1,9 @@
-from basic_info.models.jockey import Jockey as BaseJockey
 from django.db import models
 
+from .master import Master
 
-class Jockey(models.Model):
+
+class JockeyResult(models.Model):
     year = models.IntegerField()
     rank = models.IntegerField()
     first = models.IntegerField()
@@ -23,15 +24,16 @@ class Jockey(models.Model):
     quinella_rate = models.FloatField()
     show_rate = models.FloatField()
     earnings = models.FloatField()
-    jockey = models.ForeignKey(BaseJockey, on_delete=models.CASCADE)
+
+    jockey = models.ForeignKey(Master, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = '騎手成績'
         verbose_name_plural = verbose_name
         constraints = [
             models.UniqueConstraint(
-                fields=['year', 'jockey'],
-                name="jockey_unique"
+                fields=['year', 'jockey_id'],
+                name="jockey_result_unique"
             )
         ]
 
