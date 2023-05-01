@@ -1,15 +1,17 @@
-export async function fetchRaceResult() {
-    const response = await fetch('http://localhost:8080/api/result/races/');
-    const data: RaceResultResponse[] = await response.json();
+export async function fetchHorseResult(horseId: string) {
+    if (horseId === undefined) {
+        return undefined;
+    }
+
+    const response = await fetch(`http://localhost:8080/api/result/horse/${horseId}/`);
+    const data: HorseResponse = await response.json();
 
     const raceResults: RaceResultType[] = [];
-    for (const obj of data) {
+    for (const obj of data.results) {
         raceResults.push({
             id: obj.id,
             bracket: obj.bracket,
             horseNumber: obj.horse_number,
-            horseId: obj.horse.id,
-            horseName: obj.horse.name,
             gender: obj.get_gender_display,
             age: obj.age,
             jockeyWeight: obj.jockey_weight,
@@ -18,13 +20,16 @@ export async function fetchRaceResult() {
             odds: obj.odds,
             rank: obj.rank,
             trainingCenter: obj.get_training_center_display,
-            jokeyName: obj.jockey.name,
-            trainerName: obj.trainer.name,
-            ownerName: obj.horse.owner?.name || '',
+            jokeyName: obj.jockey.name
         });
     }
 
-    return raceResults;
+    return {
+        id: data.id,
+        name: data.name,
+        ownerName: data.owner.name,
+        results: raceResults
+    };
 }
 
 
@@ -33,18 +38,7 @@ type OwnerResponse = {
     name: string;
 }
 
-type HorseResponse = {
-    id: number;
-    name: string;
-    owner: OwnerResponse
-}
-
 type JockeyResponse = {
-    id: number;
-    name: string;
-}
-
-type TrainerResponse = {
     id: number;
     name: string;
 }
@@ -53,7 +47,6 @@ type RaceResultResponse = {
     id: number;
     bracket: number;
     horse_number: number;
-    horse: HorseResponse;
     get_gender_display: string;
     age: number;
     jockey_weight: number;
@@ -63,15 +56,12 @@ type RaceResultResponse = {
     rank: number;
     get_training_center_display: string;
     jockey: JockeyResponse;
-    trainer: TrainerResponse;
 }
 
 export type RaceResultType = {
     id: number;
     bracket: number;
     horseNumber: number;
-    horseId: number;
-    horseName: string;
     gender: string;
     age: number;
     jockeyWeight: number;
@@ -81,6 +71,18 @@ export type RaceResultType = {
     rank: number;
     trainingCenter: string;
     jokeyName: string;
-    trainerName: string;
+}
+
+type HorseResponse = {
+    id: number;
+    name: string;
+    owner: OwnerResponse
+    results: RaceResultResponse[];
+}
+
+export type HorseResultType = {
+    id: number;
+    name: string;
     ownerName: string;
+    results: RaceResultType[];
 }

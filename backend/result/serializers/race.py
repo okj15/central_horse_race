@@ -45,6 +45,6 @@ class RaceResultSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Race
-        fields = ['id', 'race_id', 'horse', 'bracket', 'horse', 'age', 'get_gender_display', 'jockey_weight',
+        fields = ['id', 'race_id', 'bracket', 'horse', 'age', 'get_gender_display', 'jockey_weight',
                   'horse_number', 'race_time', 'popularity', 'odds', 'rank', 'get_training_center_display', 'jockey',
                   'trainer']

@@ -26,4 +26,4 @@ class RaceResultView(generics.ListAPIView):
         return Race.objects.filter(race_id=query)
 
     def filter_queryset(self, queryset):
-        return queryset
+        return queryset.order_by('rank')
