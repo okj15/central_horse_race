@@ -1,7 +1,7 @@
 from .master import Master
-from .result import RaceResult
+from .result import RacingHorseResult
 
 __all__ = [
     'Master',
-    'RaceResult'
+    'RacingHorseResult'
 ]

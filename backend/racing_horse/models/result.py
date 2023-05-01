@@ -6,7 +6,7 @@ from trainer.models import Master as TrainerMaster
 from .master import Master as HorseMaster
 
 
-class RaceResult(models.Model):
+class RacingHorseResult(models.Model):
     GENDER = (
         (1, '牡'),
         (2, '牝'),
