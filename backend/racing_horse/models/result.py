@@ -36,7 +36,7 @@ class RacingHorseResult(models.Model):
     horse_weight = models.IntegerField(null=True)  # 馬体重
     horse_weight_change = models.IntegerField(null=True)  # 馬体重の変化
 
-    race_id = models.ForeignKey(Race, on_delete=models.SET_NULL, null=True)  # レースID
+    race = models.ForeignKey(Race, on_delete=models.SET_NULL, null=True)  # レースID
     horse = models.ForeignKey(HorseMaster, on_delete=models.SET_NULL, null=True)  # 馬名
     jockey = models.ForeignKey(JockeyMaster, on_delete=models.SET_NULL, null=True)  # 騎手
     trainer = models.ForeignKey(TrainerMaster, on_delete=models.SET_NULL, null=True)  # 調教師

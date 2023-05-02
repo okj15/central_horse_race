@@ -1,5 +1,5 @@
 export async function fetchRaceResult() {
-    const response = await fetch('http://localhost:8080/api/result/races/');
+    const response = await fetch('http://localhost:8080/api/racing_horse/results/');
     const data: RaceResultResponse[] = await response.json();
 
     const raceResults: RaceResultType[] = [];

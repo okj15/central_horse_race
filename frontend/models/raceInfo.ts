@@ -1,5 +1,5 @@
 export async function fetchRaceInfo() {
-    const response = await fetch('http://localhost:8080/api/result/raceinfo/');
+    const response = await fetch('http://localhost:8080/api/race/');
     const data: RaceInfoResponse[] = await response.json();
 
     if (data.length === 0) {
