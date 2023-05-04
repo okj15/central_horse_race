@@ -1,32 +1,58 @@
-import pathlib
-
-import pandas as pd
-from tqdm import tqdm
-
-from base_scraper import BaseScraping
+from scraper.scrapers.base_scraper import BaseScraper
+from jockey.models import JockeyResult
 
 
-class JockeyScraping(BaseScraping):
-    def __init__(self):
-        super().__init__()
-        self.table_name = 't_jockey'
+class JockeyResultScraper(BaseScraper):
 
-    def convert_html_to_df(self):
-        pass
+    def parse_soup(self, soup):
+        # 表取得
+        tables = soup.find_all('tr')
 
+        results = []
+        for table in tables:
+            if table.find('td') is None:
+                continue
 
-def main():
-    jockey = JockeyScraping()
+            # 年度別成績のみ取得（累計は除外）
+            if table.find('td').text.isdecimal():
+                result = []
+                for value in table.find_all('td'):
+                    text = value.text
+                    if text and text[0] == '.':
+                        text = '0' + text
 
-    # html取得（過去データ）
-    jockey.scrape_html_past()
+                    result.append(text.replace(',', ''))
 
-    # 取得したhtmlからpandas形式のデータに変換する
-    jockey.convert_html_to_df()
+                # 代表馬は除外
+                result = result[:-1]
+                results.append(result)
 
-    # sqliteにデータを流し込む
-    jockey.to_sql(df)
+        return results
 
-
-if __name__ == '__main__':
-    main()
+    def save_db(self, results):
+        for data in results:
+            JockeyResult.objects.update_or_create(
+                year=data[0],
+                jockey_id=self.target_id,
+                defaults={
+                    'rank': data[1],
+                    'first_place': data[2],
+                    'second_place': data[3],
+                    'third_place': data[4],
+                    'unplaced': data[5],
+                    'graded_runs': data[6],
+                    'graded_win': data[7],
+                    'special_runs': data[8],
+                    'special_win': data[9],
+                    'general_runs': data[10],
+                    'general_win': data[11],
+                    'turf_runs': data[12],
+                    'turf_win': data[13],
+                    'dirt_runs': data[14],
+                    'dirt_win': data[15],
+                    'win_rate': data[16],
+                    'multiple_win_rate': data[17],
+                    'show_rate': data[18],
+                    'earn_prize': data[19]
+                }
+            )

@@ -19,3 +19,12 @@ tmp
 
 # notebook
 notebook/.ipynb_checkpoints
+
+.dockerignore
+.DS_Store
+
+# 環境設定
+.env
+
+# TODO: 一時的に対応
+_src-django

@@ -12,7 +12,8 @@ services:
       - "8080:8080"
     environment:
       # 1ならデバックモード
-      - DEBUG=1
+      SCRAPE_URL: ${SCRAPE_URL}
+      DEBUG: 1
     command: /bin/bash -c "python backend/manage.py runserver 0.0.0.0:8080"
   next-js:
     container_name: horse-next-js
