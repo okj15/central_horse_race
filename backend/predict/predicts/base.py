@@ -1,7 +1,8 @@
 import sqlite3
-import pandas as pd
+
 import lightgbm as lgb
 import optuna.integration.lightgbm as lgb_o
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 

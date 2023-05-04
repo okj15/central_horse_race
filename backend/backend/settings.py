@@ -49,10 +49,7 @@ INSTALLED_APPS = [
     'racing_horse',
     'trainer',
     'scraper',
-    'predict',
-    'race_info',
-    'basic_info',
-    'result'
+    'predict'
 ]
 
 MIDDLEWARE = [
@@ -145,4 +142,4 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 # envファイルから環境変数を読み込む
-SCRAPE_URL=os.environ['SCRAPE_URL']
+SCRAPE_URL = os.environ['SCRAPE_URL']

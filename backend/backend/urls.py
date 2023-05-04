@@ -20,8 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('predict/', include('predict.urls')),
-    # path('api/result/', include('result.urls')),
     path('api/racing_horse/', include('racing_horse.urls')),
     path('api/race/', include('race.urls')),
 ]
