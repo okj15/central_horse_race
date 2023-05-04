@@ -20,6 +20,9 @@ tmp
 # notebook
 notebook/.ipynb_checkpoints
 
+.dockerignore
+.DS_Store
+
 # 環境設定
 .env
 
