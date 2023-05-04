@@ -1,9 +1,9 @@
 from scraper.scrapers.base_scraper import BaseScraper
-from trainer.models import TrainerResult
+from breeder.models import BreederResult
 
 
-class TrainerResultScraper(BaseScraper):
-    APP_NAME = 'trainer'
+class BreederResultScraper(BaseScraper):
+    APP_NAME = 'breeder'
 
     def parse_soup(self, soup):
         # 表取得
@@ -32,9 +32,9 @@ class TrainerResultScraper(BaseScraper):
 
     def save_db(self, results):
         for data in results:
-            TrainerResult.objects.update_or_create(
+            BreederResult.objects.update_or_create(
                 year=data[0],
-                trainer_id=self.target_id,
+                breeder_id=self.target_id,
                 defaults={
                     'rank': data[1],
                     'first_place': data[2],

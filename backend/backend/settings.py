@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'race',
     'racing_horse',
     'trainer',
+    'scraper',
     'predict',
     'race_info',
     'basic_info',
@@ -142,3 +143,6 @@ DEBUG_TOOLBAR_CONFIG = {
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
+
+# envファイルから環境変数を読み込む
+SCRAPE_URL=os.environ['SCRAPE_URL']

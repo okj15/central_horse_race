@@ -19,3 +19,9 @@ tmp
 
 # notebook
 notebook/.ipynb_checkpoints
+
+# 環境設定
+.env
+
+# TODO: 一時的に対応
+._src-django

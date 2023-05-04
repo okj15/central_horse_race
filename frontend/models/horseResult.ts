@@ -3,7 +3,7 @@ export async function fetchHorseResult(horseId: string) {
         return undefined;
     }
 
-    const response = await fetch(`http://localhost:8080/api/result/horse/${horseId}/`);
+    const response = await fetch(`http://localhost:8080/api/racing_horse/detail/${horseId}/`);
     const data: HorseResponse = await response.json();
 
     const raceResults: RaceResultType[] = [];

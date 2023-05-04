@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from ..models import RacingHorseResult
-from ..serializers.result import RacingHorseResultSerializer
+from ..serializers.list import RacingHorseResultSerializer
 
 class RacingHorseResultsView(generics.ListAPIView):
     serializer_class = RacingHorseResultSerializer
