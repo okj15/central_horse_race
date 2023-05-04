@@ -24,4 +24,4 @@ notebook/.ipynb_checkpoints
 .env
 
 # TODO: 一時的に対応
-._src-django
+_src-django
