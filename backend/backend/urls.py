@@ -20,8 +20,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/racing_horse/', include('racing_horse.urls')),
+    path('api/breeder/', include('breeder.urls')),
+    path('api/jockey/', include('jockey.urls')),
+    path('api/owner/', include('owner.urls')),
     path('api/race/', include('race.urls')),
+    path('api/racing_horse/', include('racing_horse.urls')),
+    path('api/trainer/', include('trainer.urls')),
 ]
 
 if settings.DEBUG:

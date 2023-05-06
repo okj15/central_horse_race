@@ -1,4 +1,4 @@
-import {RaceInfoType} from "@/models/raceInfo";
+import {RaceInfoType} from "@/pages/api/raceInfo";
 
 function RaceInfo(props: { raceInfo: RaceInfoType | null }) {
     return (

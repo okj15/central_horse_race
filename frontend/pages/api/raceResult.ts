@@ -1,5 +1,6 @@
-export async function fetchRaceResult() {
-    const response = await fetch('http://localhost:8080/api/racing_horse/results/');
+export async function fetchRaceResult(raceId: number = 202101010101) {
+    const url = `http://localhost:8080/api/racing_horse/results/?race=${raceId}`;
+    const response = await fetch(url);
     const data: RaceResultResponse[] = await response.json();
 
     const raceResults: RaceResultType[] = [];
@@ -19,7 +20,7 @@ export async function fetchRaceResult() {
             rank: obj.rank,
             trainingCenter: obj.get_training_center_display,
             jokeyName: obj.jockey.name,
-            trainerName: obj.trainer.name,
+            trainerName: obj.trainer?.name || '',
             ownerName: obj.horse.owner?.name || '',
         });
     }

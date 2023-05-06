@@ -10,6 +10,6 @@ class RaceView(generics.ListAPIView):
     def get_queryset(self):
         query = self.request.query_params.get('race', None)
         if query is None:
-            query = '201601010101'
+            return []
 
         return [Race.objects.filter(race_id=query).first()]

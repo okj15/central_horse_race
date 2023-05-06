@@ -9,7 +9,7 @@ class RacingHorseResultsView(generics.ListAPIView):
     def get_queryset(self):
         race_id = self.request.query_params.get('race', None)
         if race_id is None:
-            race_id = '201601010101'
+            return []
 
         return RacingHorseResult.objects.filter(race__race_id=race_id)
 

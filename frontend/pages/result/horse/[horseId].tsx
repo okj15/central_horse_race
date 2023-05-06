@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {fetchHorseResult, HorseResultType} from "@/models/horseResult";
+import {fetchHorseResult, HorseResultType} from "@/pages/api/horseResult";
 import {useRouter} from "next/router";
 
 function HorseResultDetail() {
